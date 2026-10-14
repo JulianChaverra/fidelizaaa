@@ -33,7 +33,7 @@ export default function LandingFideliza() {
         
         <div className="precio-card">
           <h2 className="precio-mensual">
-            Plan Único Fidelizaaa: $9.000 <span>COP / mes</span>
+            Plan Único Fideliza: $9.900 <span>COP / mes</span>
           </h2>
           <p className="precio-nota">
             Sin contratos de permanencia, cancela cuando quieras. Todo incluido desde el primer día.
@@ -51,7 +51,7 @@ export default function LandingFideliza() {
               <tr>
                 <td><strong>Fidelizaaa</strong></td>
                 <td><strong>Ilimitados</strong></td>
-                <td><strong>$9.000 COP</strong></td>
+                <td><strong>$9.900 COP</strong></td>
               </tr>
             </tbody>
           </table>
@@ -103,7 +103,7 @@ export default function LandingFideliza() {
           </div>
           <div className="beneficio-card">
             <span className="emoji">💸</span>
-            <p>Tarifa plana $9.000<br />Sin cobros ocultos</p>
+            <p>Tarifa plana $9.900<br />Sin cobros ocultos</p>
           </div>
         </div>
       </section>
@@ -112,7 +112,7 @@ export default function LandingFideliza() {
       <section className="landing-comofunciona">
         <h2>¿Cómo funciona?</h2>
         <ol>
-          <li>1- Registra tu comercio y activa tu plan por solo $9.000 COP al mes.</li>
+          <li>1- Registra tu comercio y activa tu plan por solo $9.900 COP al mes.</li>
           <li>2- Genera y descarga tu código QR oficial directamente desde tu panel.</li>
           <li>3- Pon tu QR en el mostrador (impreso o en pantalla) para que tus clientes lo escaneen desde su celular.</li>
           <li>4- Otorga puntos por compras, redime premios y fideliza a tus clientes al instante.</li>
@@ -133,7 +133,7 @@ export default function LandingFideliza() {
           className="landing-btn-principal"
           onClick={() => router.push("/panel/registro")}
         >
-          Registra tu comercio por $9.000/mes
+          Registra tu comercio por $9.900/mes
         </button>
         <span className="landing-cta-nota">Puesta en marcha en 2 minutos. ¡Potencia tu negocio hoy mismo!</span>
       </section>
