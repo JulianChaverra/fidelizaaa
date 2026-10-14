@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import Cookies from 'js-cookie'
 import QrScanner from '../../components/QrScanner'
-import './carga.css'
+import './redimir.css'
 import jwt_encode from "jwt-encode"
 
 export default function CargaPuntos() {
