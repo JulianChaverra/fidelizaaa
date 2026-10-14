@@ -1,0 +1,120 @@
+.usuario-main {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* separa logo + tarjeta + footer */
+  align-items: center;
+  padding: 0.5rem 1.5rem;
+}
+
+.usuario-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.usuario-footer {
+  font-size: 0.75rem;
+  opacity: 0.6;
+  text-align: center;
+  margin-top: 2rem;
+  padding-bottom: 0.5rem;
+}
+
+.usuario-card {
+  background-color: white;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 1.25rem;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  transition: box-shadow 0.2s ease;
+}
+
+.usuario-logo {
+  display: block;
+  width: 80%;
+  height: auto;
+}
+
+.usuario-contenido {
+  margin-top: 1rem;
+}
+
+.usuario-nombre {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.usuario-puntos {
+  margin-top: 0.75rem;
+  font-size: 1.2rem;
+}
+
+.usuario-puntos .puntos {
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.usuario-mensaje {
+  font-size: 0.875rem;
+  margin-top: 1.25rem;
+  opacity: 0.9;
+}
+
+.text-white {
+  color: #ffffff;
+}
+
+.text-black {
+  color: #000000;
+}
+
+.usuario-logo-text {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.usuario-ver-premios {
+  margin-top: 2rem;
+  width: 100%;
+  background: #487358;
+  color: #ffffff;
+  font-size: 1.08rem;
+  font-weight: 700;
+  padding: 0.9rem 0;
+  border: none;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(80, 80, 80, 0.05);
+  cursor: pointer;
+  transition: background 0.15s;
+  letter-spacing: 0.01em;
+}
+.usuario-ver-premios:hover {
+  background: #ffe08a;
+}
+
+.resumen-volver {
+  background: #347c53;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 0.54rem 1.1rem;
+  cursor: pointer;
+  transition: background 0.17s;
+  align-self: flex-start;
+  margin-left: 2vw;
+  box-shadow: 0 2px 7px 0 rgba(24,24,24,0.07);
+}
+.resumen-volver:hover {
+  background: #46997d;
+  color: #fffde5;
+}

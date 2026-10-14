@@ -1,0 +1,92 @@
+.pagina-tarjetas {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 1.5rem;
+  }
+  
+  .titulo-tarjetas {
+    font-size: 1.75rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .grid-tarjetas {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  
+  @media (min-width: 640px) {
+    .grid-tarjetas {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .logo-fideliza {
+    display: block;
+    margin: 0 auto 1rem auto;
+    width: 60%;
+    height: auto;
+    padding-bottom: 20px;
+  }
+
+  .saludo-fideliza {
+    text-align: center;
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+  
+  .tarjeta-boton {
+    border-radius: 1rem;
+    padding: 1.5rem;
+    text-align: center;
+    background-color: white;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .tarjeta-boton:hover {
+    transform: scale(1.02);
+  }
+  
+  .tarjeta-logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 100px;
+    object-fit: contain;
+  }
+  
+  .tarjeta-nombre {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #000;
+    margin-bottom: 0.25rem;
+  }
+  
+  .tarjeta-puntos {
+    font-size: 0.875rem;
+    color: #333;
+  }
+  
+  .footer-fideliza {
+    margin-top: auto;
+    text-align: center;
+    font-size: 0.75rem;
+    color: #666;
+    opacity: 0.6;
+    padding-top: 2rem;
+  }
+  
+  .text-white {
+    color: #fff;
+  }
+  
+  .text-black {
+    color: #000;
+  }

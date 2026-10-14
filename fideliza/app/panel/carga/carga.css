@@ -1,0 +1,126 @@
+.carga-main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+  padding: 0;
+}
+
+.logo-fideliza {
+  height: 52px;
+  margin-top: 1.5rem;
+}
+
+.titulo-carga {
+  font-size: 1.6rem;
+  margin: 2rem 0 1.3rem 0;
+  font-weight: 600;
+  color: #487358;
+  text-align: center;
+}
+
+.carga-info {
+  width: 100%;
+  max-width: 370px;
+  margin: 0 auto;
+  margin-top: 1.2rem;
+  background: #fafafa;
+  border-radius: 14px;
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  box-shadow: 0 3px 13px 0 rgba(0,0,0,0.07);
+  text-align: left;
+}
+
+.input-puntos {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: 9px;
+  border: 1px solid #c5c5c5;
+  font-size: 1.1rem;
+  margin: 1.1rem 0;
+}
+
+.botones-carga {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.boton-cargar {
+  background: #287e4e; /* Verde para carga */
+  color: #fff;
+  font-size: 1rem;
+  border: none;
+  border-radius: 11px;
+  padding: 1rem 0;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s;
+}
+
+.boton-cargar:disabled {
+  background: #adadad;
+}
+
+.boton-volver {
+  background: #f0c041;
+  color: #333;
+  font-size: 1rem;
+  border: none;
+  border-radius: 11px;
+  padding: 1rem 0;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.boton-salir {
+  background: #487358;
+  color: #fff;
+  font-size: 1rem;
+  border: none;
+  border-radius: 11px;
+  padding: 1rem 0;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.mensaje-exito {
+  color: #287e4e;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.mensaje-carga {
+  color: #287e4e;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.footer-fideliza {
+  margin-top: auto;
+  width: 100%;
+  text-align: center;
+  padding: 1.3rem 0 0.3rem 0;
+  font-size: 1rem;
+  color: #aaa;
+  letter-spacing: 0.01em;
+}
+
+.qrscanner-container {
+  width: 90vw;  
+  height: auto;       /* 80% del viewport */
+  max-width: 460px;    /* Opcional, puedes ajustar según tu diseño */
+  min-width: 260px;    /* Opcional: asegura que no sea demasiado pequeño en móvil */
+  box-sizing: border-box;
+}
+
+/* Asegura que el video o canvas interno ocupe todo el ancho del contenedor */
+.qrscanner-container video,
+.qrscanner-container canvas {
+  width: 100% !important;
+  height: auto !important;
+  border-radius: 16px;
+}

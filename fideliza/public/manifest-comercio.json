@@ -1,0 +1,23 @@
+{
+    "name": "Fideliza Comercio",
+    "short_name": "Fideliza panel",
+    "description": "Tu tarjeta digital de puntos. Gana, redime y vuelve.",
+    "start_url": "/panel",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#4e6d58",
+    "orientation": "portrait",
+    "icons": [
+    {
+        "src": "/icon-192x192.png",
+        "sizes": "192x192",
+        "type": "image/png"
+    },
+    {
+        "src": "/icon-512x512.png",
+        "sizes": "512x512",
+        "type": "image/png"
+    }
+    ]
+  }
+  

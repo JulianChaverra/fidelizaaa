@@ -1,0 +1,115 @@
+.premios-publicos-main {
+    min-height: 100vh;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 2rem;
+  }
+  
+  .premios-publicos-volver {
+    background: #347c53;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    padding: 0.6rem 1.2rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.1rem;
+    cursor: pointer;
+    transition: background 0.17s;
+    align-self: flex-start;
+    margin-left: 10px;
+    box-shadow: 0 1px 5px 0 rgba(0,0,0,0.04);
+  }
+  .premios-publicos-volver:hover {
+    background: #ffe08a;
+  }
+  
+  .premios-publicos-titulo {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #347c53;
+    margin-bottom: 2rem;
+    text-align: center;
+    width: 100%;
+  }
+  
+  .premios-publicos-loading,
+  .premios-publicos-vacio {
+    color: #555;
+    font-size: 1.1rem;
+    text-align: center;
+    margin: 2rem 0;
+  }
+  
+  .premios-publicos-lista {
+    width: 100%;
+    max-width: 880px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 22px;
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+  }
+  
+  .premios-publicos-card {
+    background: #ececec;
+    border-radius: 1.2rem;
+    box-shadow: 0 4px 14px 0 rgba(0,0,0,0.07);
+    padding: 1.2rem 1rem 1rem 1rem;
+    width: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+  
+  .premios-publicos-img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    border-radius: 10px;
+    margin-bottom: 1.1rem;
+    background: #eee;
+  }
+  
+  .premios-publicos-info {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .premios-publicos-nombre {
+    font-size: 1.12rem;
+    font-weight: 700;
+    margin-bottom: 0.45rem;
+    color: #293e38;
+  }
+  
+  .premios-publicos-puntos {
+    color: #287e4e;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+  }
+  
+  .premios-publicos-footer {
+    width: 100%;
+    text-align: center;
+    padding: 2rem 0 0.7rem 0;
+    font-size: 1rem;
+    color: #aaa;
+    letter-spacing: 0.01em;
+    margin-top: auto;
+  }
+  
+  .premios-publicos-logo {
+    max-width: 170px;
+    width: 60%;
+    height: auto;
+    display: block;
+    margin: 2.3rem auto 1rem auto;
+  }
+  

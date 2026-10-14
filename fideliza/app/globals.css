@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: light;
+  }
+
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  /* Asegura textos, inputs, etc. */
+  * {
+    color: inherit !important;
+  }
+}
+
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+html, body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+body > main {
+  flex: 1;
+}
+
+.instalar-pwa-contenedor {
+  display: flex;
+  justify-content: center;
+  margin: 1.5rem 0;
+}
+
+.instalar-pwa-boton {
+  background-color: #4e6d58;
+  color: white;
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.instalar-pwa-boton:hover {
+  background-color: #3c5545;
+}

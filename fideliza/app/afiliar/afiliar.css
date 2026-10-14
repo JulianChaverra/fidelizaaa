@@ -1,0 +1,89 @@
+.afiliar-main {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .afiliar-logo {
+    width: 70%;
+    max-width: 300px;
+    margin-bottom: 1rem;
+  }
+  
+  .afiliar-error {
+    color: #dc2626;
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .afiliar-logo-text {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 1rem 0;
+    text-align: center;
+  }
+  
+  
+  .afiliar-titulo {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #a3552c;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  
+  .afiliar-form {
+    width: 100%;
+    max-width: 20rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .afiliar-input {
+    border: 1px solid #ccc;
+    border-radius: 0.375rem;
+    padding: 0.75rem;
+    font-size: 0.875rem;
+    background-color: #ffffff;
+  }
+  
+  .afiliar-boton {
+    background-color: #4e6d58;
+    color: white;
+    border-radius: 0.375rem;
+    padding: 0.75rem;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: opacity 0.2s ease-in-out;
+  }
+  
+  .afiliar-boton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  
+  .text-white {
+    color: #ffffff;
+  }
+  
+  .text-black {
+    color: #000000;
+  }
+
+  .afiliar-politica-link {
+    font-size: 0.97rem;
+    text-align: center;
+    color: #4e6d58;
+    margin-top: 0.7em;
+  }
+  .afiliar-politica-link a {
+    color: #41855d;
+    text-decoration: underline;
+    font-weight: 500;
+  }
+  

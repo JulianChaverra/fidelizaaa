@@ -1,0 +1,188 @@
+.premios-main {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #fff;
+    padding-bottom: 30px;
+  }
+  
+  .logo-fideliza {
+    height: 48px;
+    margin-top: 1.5rem;
+  }
+  
+  .premios-titulo {
+    font-size: 1.7rem;
+    font-weight: 700;
+    margin: 2rem 0 1rem 0;
+    color: #487358;
+    text-align: center;
+  }
+  
+  .premios-lista {
+    width: 100%;
+  }
+  
+  .premios-cards-center {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 22px;
+    justify-content: center; /* Centra horizontalmente las cards */
+    align-items: flex-start;
+    margin-bottom: 2.3rem;
+  }
+  
+  .premios-vacio {
+    color: #7a7a7a;
+    text-align: center;
+    font-size: 1.1rem;
+    margin: 2rem 0;
+  }
+  
+  .premio-card {
+    background: #ececec;
+    border-radius: 13px;
+    box-shadow: 0 3px 12px 0 rgba(0,0,0,0.07);
+    padding: 1.2rem 1rem 1rem 1rem;
+    width: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+
+  .premio-card h3 {
+    color: #487358;
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+  
+  .premio-img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    border-radius: 9px;
+    margin-bottom: 1rem;
+    background: #eee;
+  }
+  
+  .premio-input {
+    width: 100%;
+    padding: 0.5rem 0.7rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    margin: 0.4rem 0;
+  }
+  
+  .premio-puntos {
+    color: #000000;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    margin-top: 0.4rem;
+    font-weight: 700;
+  }
+  
+  .premio-actions {
+    display: flex;
+    gap: 0.6rem;
+    margin-top: 0.5rem;
+  }
+  
+  .premio-btn {
+    background: #487358;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.47rem 0.85rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.18s;
+  }
+  
+  .premio-btn.guardar {
+    background: #287e4e;
+  }
+  
+  .premio-btn.cancelar {
+    background: #bbb;
+    color: #333;
+  }
+  
+  .premio-btn.eliminar {
+    background: #cb2227;
+    color: #fff;
+  }
+  
+  .premio-btn.editar {
+    background: #f0c041;
+    color: #222;
+  }
+  
+  .premio-btn.crear {
+    background: #287e4e;
+    margin-top: 1rem;
+    width: 100%;
+  }
+  
+  .premios-nuevo {
+    background: #ececec;
+    border-radius: 13px;
+    box-shadow: 0 3px 12px 0 rgba(0,0,0,0.07);
+    padding: 1.3rem 1rem 1.5rem 1rem;
+    width: 320px;
+    margin: 0 auto;
+    margin-top: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .premios-nuevo h3 {
+    color: #487358;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+  
+  .premios-mensaje {
+    text-align: center;
+    color: #287e4e;
+    margin-top: 1.7rem;
+    font-size: 1.13rem;
+    font-weight: 600;
+  }
+  
+  .footer-fideliza {
+    margin-top: auto;
+    width: 100%;
+    text-align: center;
+    padding: 1.3rem 0 0.3rem 0;
+    font-size: 1rem;
+    color: #aaa;
+    letter-spacing: 0.01em;
+  }
+  
+  .premios-volver {
+    background: #487358;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    padding: 0.6rem 1.2rem;
+    margin-top: 1.2rem;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    transition: background 0.17s;
+    align-self: flex-start;
+    margin-left: 16px;
+    box-shadow: 0 1px 5px 0 rgba(255, 255, 255, 0.04);
+  }
+  .premios-volver:hover {
+    background: #ffe08a;
+  }
+  

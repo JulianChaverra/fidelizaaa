@@ -1,0 +1,169 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("POSTGRES_PRISMA_URL")
+}
+
+model Comercio {
+  id              String        @id @default(cuid())
+  nombre          String
+  slug            String        @unique
+  tipoDocumento   TipoDocumento
+  numeroDocumento String
+  celular         String
+  correo          String        @unique
+
+  nombreContacto  String
+  correoContacto  String
+  celularContacto String
+
+  logoUrl String?
+  color   String?
+  qrUrl   String?
+
+  activo           Boolean   @default(false)
+  fechaPago        DateTime?
+  fechaVencimiento DateTime?
+
+  codigoLogin String?
+
+  // Referido y exención
+  codigoReferido      String?
+  esExentoDeCobro     Boolean @default(false)
+  referidosAcumulados Int     @default(0)
+
+  // Relaciones
+  usuarios         UsuarioComercio[]
+  transacciones    Transaccion[]
+  pagos            PagoComercio[]
+  premios          Premio[]
+  // Referidos: quien refiere y quien fue referido
+  referidos        ReferidoComercio[] @relation("ComercioReferente")
+  fueReferidoPor   ReferidoComercio[] @relation("ComercioReferido")
+  // Relación inversa a sus propios códigos de referido (como dueño)
+  codigosReferidos CodigoReferido[]
+
+  createdAt DateTime @default(now())
+}
+
+model ReferidoComercio {
+  id                  String   @id @default(cuid())
+  comercioReferente   Comercio @relation("ComercioReferente", fields: [comercioReferenteId], references: [id])
+  comercioReferenteId String
+  comercioReferido    Comercio @relation("ComercioReferido", fields: [comercioReferidoId], references: [id])
+  comercioReferidoId  String
+  usadoEnFactura      Boolean  @default(false) // Si ya fue redimido el descuento del referido
+  createdAt           DateTime @default(now())
+}
+
+// NUEVO: Tabla para todos los códigos de referido válidos
+model CodigoReferido {
+  id          String             @id @default(cuid())
+  codigo      String             @unique
+  tipo        TipoCodigoReferido
+  comercio    Comercio?          @relation(fields: [comercioId], references: [id])
+  comercioId  String? // Solo para códigos de comercios (null para fideliza)
+  descripcion String?
+  activo      Boolean            @default(true)
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+}
+
+enum TipoCodigoReferido {
+  fideliza
+  comercio
+  promo
+}
+
+model PagoComercio {
+  id              String    @id @default(cuid()) // Referencia única por pago
+  comercio        Comercio  @relation(fields: [comercioId], references: [id])
+  comercioId      String
+  monto           Int // Valor en pesos COP
+  moneda          String // "COP" o "USD"
+  metodo          String // "manual", "wompi", "stripe"
+  fechaPago       DateTime? // Fecha en que fue APROBADO
+  observacion     String?
+  wompiId         String? // ID de transacción en Wompi
+  wompiReferencia String? // Por lo general será igual a id, pero lo guardas por claridad
+  wompiEstado     String? // "PENDING", "APPROVED", "DECLINED"...
+  wompiFirma      String? // Firma de integridad usada (opcional)
+  wompiDetalles   Json? // Toda la data de Wompi, útil para auditoría/soporte
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+enum TipoDocumento {
+  CC
+  NIT
+  CE
+}
+
+model Usuario {
+  id                  String            @id @default(cuid())
+  telefono            String            @unique
+  nombre              String?
+  correo              String?           @unique
+  tokenNotificaciones String?
+  codigoLogin         String?
+  comercios           UsuarioComercio[]
+  createdAt           DateTime          @default(now())
+}
+
+model UsuarioComercio {
+  id         String   @id @default(cuid())
+  usuario    Usuario  @relation(fields: [usuarioId], references: [id])
+  usuarioId  String
+  comercio   Comercio @relation(fields: [comercioId], references: [id])
+  comercioId String
+  puntos     Int      @default(0)
+  createdAt  DateTime @default(now())
+
+  transacciones Transaccion[]
+
+  @@unique([usuarioId, comercioId])
+}
+
+model Transaccion {
+  id                String          @id @default(cuid())
+  usuarioComercio   UsuarioComercio @relation(fields: [usuarioComercioId], references: [id])
+  usuarioComercioId String
+
+  comercio   Comercio @relation(fields: [comercioId], references: [id])
+  comercioId String
+
+  tipo      TipoTransaccion
+  puntos    Int
+  nota      String?
+  createdAt DateTime        @default(now())
+}
+
+enum TipoTransaccion {
+  add
+  redeem
+}
+
+model Premio {
+  id          String   @id @default(cuid())
+  comercio    Comercio @relation(fields: [comercioId], references: [id])
+  comercioId  String
+  nombre      String
+  imagenUrl   String?
+  valorPuntos Int
+  activo      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model TarifaComercio {
+  id           String   @id @default(cuid())
+  nombre       String // Ej: "Plan Básico", "Plan Intermedio"
+  minUsuarios  Int // Usuarios activos mínimos para este rango
+  maxUsuarios  Int // Usuarios activos máximos para este rango
+  valorMensual Int // Valor en COP (ej: 24900)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}

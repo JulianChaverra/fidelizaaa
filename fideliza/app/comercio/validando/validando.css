@@ -1,0 +1,86 @@
+.validando-main {
+  text-align: center;
+  padding: 3rem 1rem;
+  min-height: 80vh;
+  background: #fff;
+}
+
+.registro-logo {
+  display: block;
+    max-width: 180px;
+    margin: 0 auto 1.5rem auto;
+  
+}
+
+.validando-status-box {
+  margin: 2rem auto 2.5rem auto;
+  max-width: 400px;
+  background: #fafafa;
+  border-radius: 16px;
+  padding: 2rem 1rem;
+  box-shadow: 0 2px 12px #0001;
+}
+
+.loader {
+  margin: 1rem auto 1.5rem auto;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #4e6d58;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg);}
+  100% { transform: rotate(360deg);}
+}
+
+.success-check {
+  font-size: 3rem;
+  color: #48bb78;
+  margin-bottom: 1rem;
+}
+
+.fail-cross {
+  font-size: 2.5rem;
+  color: #e53e3e;
+  margin-bottom: 1rem;
+}
+
+.success-msg {
+  font-weight: bold;
+  color: #48bb78;
+}
+
+.fail-msg {
+  color: #e53e3e;
+}
+
+.pending-msg {
+  color: #bfa100;
+}
+
+.registro-login-boton {
+  background: #4e6d58;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7em 1.6em;
+  margin-top: 1.4em;
+  font-size: 1.05em;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.registro-login-boton:hover {
+  background: #34503c;
+}
+
+.registro-footer {
+  margin-top: 3rem;
+  color: #988e7d;
+  font-size: 1em;
+  letter-spacing: 0.04em;
+}
