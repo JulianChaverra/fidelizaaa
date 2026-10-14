@@ -58,7 +58,7 @@ export default function LandingFideliza() {
 
           <ul>
             <li>✓ Generador de Código QR Digital instantáneo</li>
-            <li>✓ Aplicación movil para clientes(App Store / Play Store)</li>
+            <li>✓ Aplicación movil para clientes y comercio</li>
             <li>✓ Carga y redención de puntos ilimitada</li>
             <li>✓ Notificaciones y campañas para reactivar clientes</li>
             <li>✓ Panel de control y analíticas de tu comercio</li>
