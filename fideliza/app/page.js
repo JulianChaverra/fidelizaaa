@@ -8,7 +8,7 @@ export default function LandingFideliza() {
   
   return (
     <main className="landing-main">
-      {/* Hero */}
+      {/* Hero */} 
       <header className="landing-hero">
         <img src="/logo-fideliza.png" alt="Fideliza" className="landing-logo" />
         <h1 className="landing-titulo">Fideliza: Más que puntos, clientes recurrentes</h1>
