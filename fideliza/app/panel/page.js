@@ -125,8 +125,7 @@ export default function PanelInicio() {
     bannerClass += " gratis"
     bannerText = (
       <>
-      
-        <span>Tu comercio está en <b>plan gratuito</b> hasta llegar a 100 usuarios.</span>
+        <span>Tu comercio está en <b>plan gratuito</b> hasta llegar a 20 usuarios.</span>
         <br />
         <span>
           Usuarios: <b>{usuariosActuales}/{maxUsuariosGratis}</b>
@@ -152,7 +151,11 @@ export default function PanelInicio() {
   // --- PANEL RENDER ---
   return (
     <main className="panel-main">
-      <InstalarPWA />
+      <InstalarPWA 
+        titulo="Fidelizaaa Comercio"
+        descripcion="Instala el panel en la pantalla de tu teléfono o tablet para escanear y cargar puntos en segundos."
+        icono="💈"
+      />
       <div className="panel-encabezado">
         <img src="/logo-fideliza.png" alt="Fideliza" className="panel-logo" />
       </div>
@@ -183,7 +186,7 @@ export default function PanelInicio() {
                   <div className="panel-plan-titulo">Plan actual:</div>
                   <div className="panel-plan-nombre">{planActual.nombreTarifa}</div>
                   <div className="panel-plan-detalle">
-                    Usuarios permitidos: <b>{planActual.minUsuariosTarifa} - {planActual.maxUsuariosTarifa}</b><br />
+                    Usuarios permitidos: <b>{planActual.minUsuariosTarifa} – {planActual.maxUsuariosTarifa}</b><br />
                     Valor mensual: <b>${planActual.monto.toLocaleString('es-CO')}</b>
                   </div>
                   <div className="panel-plan-usuarios">
@@ -206,6 +209,7 @@ export default function PanelInicio() {
       {/* BOTONES de ACCIONES SOLO si NO está vencido */}
       {!vencido && (
         <div className="panel-botones">
+          <button className="panel-boton" onClick={() => router.push('/panel/config')}>Personalizar marca y logo</button>
           <button className="panel-boton" onClick={() => router.push('/panel/referido')}>Comercios referidos</button>
           <button className="panel-boton" onClick={() => router.push('/panel/qrcomercio')}>Descargar QR del comercio</button>
           <button className="panel-boton" onClick={() => router.push('/panel/premios')}>Configuración de premios</button>

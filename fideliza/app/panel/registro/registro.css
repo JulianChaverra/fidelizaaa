@@ -1,149 +1,369 @@
+/* =========================================================
+   PÁGINA Y CONTENEDOR PRINCIPAL DE REGISTRO
+   ========================================================= */
+
 .registro-main {
-    padding: 2rem;
-    max-width: 600px;
-    margin: auto;
-    font-family: sans-serif;
-  }
-  
-  .registro-main h1 {
-    font-size: 1.8rem;
-    text-align: center;
-    margin-bottom: 1rem;
-  }
-  
-  .registro-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  
-  .registro-form input,
-  .registro-form select {
-    padding: 0.75rem;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    background: #fff;
-  }
-  
-  .registro-form button {
-    background-color: #5f4b32;
-    color: white;
-    padding: 0.75rem;
-    font-weight: bold;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  
-  .registro-form button:hover {
-    background-color: #4e3e28;
-  }
-  
-  .registro-error {
-    background: #ffe5e5;
-    color: #b00020;
-    padding: 1rem;
-    border-radius: 6px;
-    margin-bottom: 1rem;
-    text-align: center;
-  }
-  
-  .registro-logo {
-    display: block;
-    max-width: 180px;
-    margin: 0 auto 1.5rem auto;
-  }
+  min-height: 100vh;
+  padding: 2rem 1.5rem;
+  max-width: 520px;
+  margin: 0 auto;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
 
-  .registro-form label {
-    font-weight: bold;
-    margin-bottom: -0.5rem;
-  }
+.registro-logo {
+  display: block;
+  max-width: 180px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  margin: 0 auto 1.5rem auto;
+}
 
-  .registro-footer{
-    margin-top: auto;
-    text-align: center;
-    font-size: 0.75rem;
-    color: #666;
-    opacity: 0.6;
-    padding-top: 2rem;
-  }
+.registro-main h1 {
+  font-size: 1.75rem;
+  font-weight: 800;
+  text-align: center;
+  color: #17241d;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+}
 
-  .registro-color {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-  }
-  
-  .color-preview {
-    width: 32px;
-    height: 32px;
-    border-radius: 6px;
-    border: 1px solid #999;
-  }
+/* Formulario */
+.registro-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
 
-  .registro-login-boton {
-    margin-top: 1rem;
-    background: #4e6d58;
-    color: white;
-    padding: 0.6rem 1rem;
-    border: none;
-    border-radius: 6px;
-    font-weight: bold;
-    cursor: pointer;
-  }
+.registro-form label {
+  font-weight: 700;
+  font-size: 0.88rem;
+  margin-bottom: -0.25rem;
+  text-align: left;
+}
 
-  .afiliar-politica-link {
-    font-size: 0.97rem;
-    text-align: center;
-    color: #4e6d58;
-    margin-top: 0.7em;
-  }
-  .afiliar-politica-link a {
-    color: #41855d;
-    text-decoration: underline;
-    font-weight: 500;
-  }
+.registro-form input,
+.registro-form select {
+  padding: 0.85rem 1rem;
+  font-size: 0.95rem;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  background-color: #ffffff;
+  color: #1f2937;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
 
-  .loader {
-  margin: 1rem auto;
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #4e6d58;
-  border-radius: 50%;
+.registro-form input:focus,
+.registro-form select:focus {
+  border-color: #487358;
+  box-shadow: 0 0 0 3px rgba(72, 115, 88, 0.15);
+}
+
+.registro-form input.campo-error {
+  border-color: #ef4444;
+  background-color: #fef2f2;
+}
+
+/* Selector de Color */
+.registro-color {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.registro-color input[type="color"] {
+  width: 44px;
+  height: 44px;
+  padding: 2px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  cursor: pointer;
+  background: transparent;
+}
+
+.registro-color input[type="text"] {
+  flex: 1;
+}
+
+.color-preview {
   width: 36px;
   height: 36px;
-  animation: spin 0.9s linear infinite;
-}
-@keyframes spin {
-  0% { transform: rotate(0deg);}
-  100% { transform: rotate(360deg);}
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  flex-shrink: 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+/* Contenedor del Valor a Pagar */
+.registro-valor-pagar {
+  background-color: #f8faf9;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+  text-align: center;
+  font-size: 1.05rem;
+  color: #2c3e35;
+  margin-top: 0.25rem;
+}
+
+.registro-valor-pagar b {
+  color: #3b6e52;
+  font-size: 1.2rem;
+}
+
+/* Botón Principal del Formulario */
+.registro-form button[type="submit"] {
+  background-color: #487358;
+  color: #ffffff;
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 14px rgba(72, 115, 88, 0.25);
+  margin-top: 0.5rem;
+}
+
+.registro-form button[type="submit"]:hover:not(:disabled) {
+  background-color: #365b45;
+  box-shadow: 0 6px 18px rgba(54, 91, 69, 0.35);
+}
+
+.registro-form button[type="submit"]:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.registro-form button[type="submit"]:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Mensajes de Error */
+.registro-error {
+  background: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+  padding: 0.9rem 1rem;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.registro-login-boton {
+  margin-top: 1rem;
+  background-color: #487358;
+  color: #ffffff;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.registro-login-boton:hover {
+  background-color: #365b45;
+}
+
+/* Enlace a Políticas */
+.afiliar-politica-link {
+  font-size: 0.85rem;
+  text-align: center;
+  color: #64748b;
+  margin-top: 0.5rem;
+  line-height: 1.4;
+}
+
+.afiliar-politica-link a {
+  color: #487358;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.afiliar-politica-link a:hover {
+  color: #365b45;
+}
+
+/* Pantalla de Éxito */
 .registro-exito {
   text-align: center;
-  background: #f6fbe8;
-  border: 1px solid #bbf0aa;
-  border-radius: 8px;
-  padding: 2em 1em 1.5em 1em;
-  margin: 2em auto 0 auto;
-  max-width: 420px;
+  background-color: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 20px;
+  padding: 2rem 1.5rem;
+  margin: 1.5rem auto 0 auto;
+  max-width: 440px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
 }
 
 .registro-exito h2 {
-  color: #41855d;
-  margin-bottom: 1em;
+  color: #166534;
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+}
+
+.registro-exito p {
+  color: #374151;
+  font-size: 0.92rem;
+  line-height: 1.5;
 }
 
 .registro-exito .registro-login-boton {
-  margin-top: 2em;
-  font-size: 1.1em;
-  padding: 0.8em 2em;
+  margin-top: 1.5rem;
+  font-size: 1rem;
+  padding: 0.85rem 2rem;
 }
 
 .registro-qr {
-  margin: 1.3em auto 0 auto;
-  max-width: 200px;
+  margin: 1.5rem auto 0 auto;
+  max-width: 190px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  padding: 8px;
+  background: #ffffff;
   display: block;
 }
 
+/* Loader */
+.loader {
+  margin: 1.5rem auto;
+  border: 3px solid #e2e8f0;
+  border-top: 3px solid #487358;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Footer */
+.registro-footer {
+  margin-top: auto;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  padding-top: 2.5rem;
+  padding-bottom: 0.5rem;
+}
+
+
+/* =========================================================
+   COMPONENTE LOGO UPLOADER (SELECCIONAR IMAGEN)
+   ========================================================= */
+
+.logo-uploader-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.logo-uploader-label {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #2c3e35;
+  text-align: left;
+}
+
+.logo-uploader-box {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Tarjeta Preview del Logo */
+.logo-uploader-preview {
+  width: 72px;
+  height: 72px;
+  border-radius: 14px;
+  background-color: #ffffff;
+  border: 1px solid #d1d5db;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 6px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.logo-uploader-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.logo-uploader-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.logo-uploader-icon {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.logo-uploader-text {
+  font-size: 0.65rem;
+  color: #9ca3af;
+  font-weight: 500;
+}
+
+/* Botón Seleccionar Imagen (Verde Fidelizaaa) */
+.logo-uploader-btn {
+  background-color: #487358;
+  color: #ffffff;
+  border-radius: 12px;
+  padding: 0.75rem 1.2rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 8px rgba(72, 115, 88, 0.2);
+  user-select: none;
+}
+
+.logo-uploader-btn:hover {
+  background-color: #365b45;
+  box-shadow: 0 4px 12px rgba(54, 91, 69, 0.3);
+}
+
+.logo-uploader-btn:active {
+  transform: scale(0.97);
+}
+
+.logo-uploader-input-file {
+  display: none;
+}
+
+.logo-uploader-btn-content {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}

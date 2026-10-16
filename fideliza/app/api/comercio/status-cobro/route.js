@@ -5,7 +5,7 @@ import { jwtDecode } from "jwt-decode"
 const prisma = new PrismaClient()
 const DIAS_EXENCION = 30
 const DIAS_ALERTA_RENOVACION = 8
-const USUARIOS_EXENCION = 100 // Límite de usuarios en periodo gratis
+const USUARIOS_EXENCION = 20 // Límite de usuarios en periodo gratis
 
 export async function POST(req) {
   try {

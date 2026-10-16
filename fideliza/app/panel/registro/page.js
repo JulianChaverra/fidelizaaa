@@ -3,6 +3,7 @@
 import { useState, useRef } from "react"
 import { useRouter } from "next/navigation"
 import BotonPagoWompi from "../../components/BotonPagoWompi"
+import LogoUploader from "../../components/LogoUploader"
 import "./registro.css"
 
 const VALOR_BASE = 9900
@@ -79,6 +80,11 @@ export default function RegistroComercio() {
         setValorAPagar(VALOR_BASE)
       }
     }
+  }
+
+  // Callback para actualizar la URL devuelta por Vercel Blob en el estado del formulario
+  const handleLogoChange = (url) => {
+    setForm((prev) => ({ ...prev, logoUrl: url }))
   }
 
   const handleSubmit = async (e) => {
@@ -210,7 +216,13 @@ export default function RegistroComercio() {
           <input name="nombreContacto" placeholder="Nombre del contacto" value={form.nombreContacto} onChange={handleChange} required />
           <input name="correoContacto" placeholder="Correo del contacto" value={form.correoContacto} onChange={handleChange} required />
           <input name="celularContacto" placeholder="Celular del contacto" value={form.celularContacto} onChange={handleChange} required />
-          <input name="logoUrl" placeholder="URL del logo (opcional)" value={form.logoUrl} onChange={handleChange} />
+          
+          {/* Carga directa de imagen a Vercel Blob Storage */}
+          <LogoUploader 
+            value={form.logoUrl} 
+            onChange={handleLogoChange} 
+            label="Logo del comercio (opcional)"
+          />
 
           <div className="registro-valor-pagar">
             Valor a pagar: <b>{valorAPagar === 0 ? "GRATIS" : `$${valorAPagar.toLocaleString('es-CO')}`}</b>

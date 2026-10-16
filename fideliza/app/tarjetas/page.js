@@ -79,7 +79,11 @@ export default function TarjetasPage() {
         alt="Fideliza"
         className="logo-fideliza"
       />
-      <InstalarPWA />
+      <InstalarPWA 
+        titulo="Fidelizaaa Billetera"
+        descripcion="Guarda tu tarjeta digital en tu celular para acumular puntos cada vez que visites tus comercios favoritos."
+        icono="🎁"
+      />
       <p className="saludo-fideliza">
         👋 Hola {nombre}, aquí están tus comercios afiliados.
       </p>

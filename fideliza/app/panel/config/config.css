@@ -1,0 +1,319 @@
+/* =========================================================
+   ESTILOS DE CONFIGURACIÓN (FIDELIZAAA CLEAN THEME)
+   ========================================================= */
+
+.config-main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 1.5rem 1rem;
+  max-width: 480px;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+/* Header & Logo */
+.config-encabezado {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.config-logo-fideliza {
+  height: 56px;
+  object-fit: contain;
+}
+
+/* Botón Volver al Panel */
+.config-nav-back {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 1.2rem;
+}
+
+.config-boton-volver {
+  background-color: #487358;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.config-boton-volver:hover {
+  background-color: #365b45;
+}
+
+.config-boton-volver:active {
+  transform: scale(0.97);
+}
+
+/* Título de la Sección */
+.config-titulo-seccion {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #3b6e52;
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+/* Tarjeta Formulario */
+.config-card-form {
+  width: 100%;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  box-sizing: border-box;
+}
+
+.config-grupo-campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.config-label-field {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #2c3e35;
+  text-align: left;
+}
+
+.config-color-picker-box {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.config-color-input {
+  width: 44px;
+  height: 44px;
+  padding: 2px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  cursor: pointer;
+  background: transparent;
+}
+
+.config-color-hex {
+  font-size: 0.9rem;
+  font-family: monospace;
+  color: #333333;
+  font-weight: 600;
+}
+
+.config-color-muestra {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+/* Previsualización Tarjeta */
+.config-preview-tarjeta {
+  padding: 1.2rem;
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s ease, color 0.2s ease;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Clases de Contraste Automático */
+.config-preview-tarjeta.text-white {
+  color: #ffffff;
+}
+
+.config-preview-tarjeta.text-black {
+  color: #17241d;
+}
+
+.config-preview-sub {
+  font-size: 0.72rem;
+  opacity: 0.85;
+  margin: 0 0 0.3rem 0;
+  text-transform: uppercase;
+}
+
+.config-preview-nombre {
+  font-weight: 800;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.config-mensaje-exito {
+  font-size: 0.85rem;
+  text-align: center;
+  color: #41855d;
+  background-color: #eaf5d3;
+  border: 1px solid #a8e19e;
+  padding: 0.75rem;
+  border-radius: 10px;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Botón Guardar Cambios */
+.config-btn-guardar {
+  width: 100%;
+  padding: 0.9rem;
+  background-color: #487358;
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+  box-shadow: 0 4px 12px rgba(72, 115, 88, 0.2);
+}
+.logo-uploader-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+/* =========================================================
+   COMPONENTE LOGO UPLOADER (SELECCIONAR IMAGEN)
+   ========================================================= */
+
+.logo-uploader-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.logo-uploader-label {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #2c3e35;
+  text-align: left;
+}
+
+.logo-uploader-box {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Tarjeta Preview del Logo */
+.logo-uploader-preview {
+  width: 72px;
+  height: 72px;
+  border-radius: 14px;
+  background-color: #ffffff;
+  border: 1px solid #d1d5db;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 6px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.logo-uploader-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.logo-uploader-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.logo-uploader-icon {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.logo-uploader-text {
+  font-size: 0.65rem;
+  color: #9ca3af;
+  font-weight: 500;
+}
+
+/* Botón Seleccionar Imagen (Verde Fidelizaaa) */
+.logo-uploader-btn {
+  background-color: #487358;
+  color: #ffffff;
+  border-radius: 12px;
+  padding: 0.75rem 1.2rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 8px rgba(72, 115, 88, 0.2);
+  user-select: none;
+}
+
+.logo-uploader-btn:hover {
+  background-color: #365b45;
+  box-shadow: 0 4px 12px rgba(54, 91, 69, 0.3);
+}
+
+.logo-uploader-btn:active {
+  transform: scale(0.97);
+}
+
+.logo-uploader-input-file {
+  display: none;
+}
+
+.logo-uploader-btn-content {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.config-btn-guardar:hover:not(:disabled) {
+  background-color: #365b45;
+}
+
+.config-btn-guardar:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.config-btn-guardar:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Footer Unificado */
+.config-footer {
+  margin-top: auto;
+  width: 100%;
+  text-align: center;
+  padding: 2rem 0 0.4rem 0;
+  font-size: 0.93rem;
+  color: #888888;
+  letter-spacing: 0.01em;
+}
