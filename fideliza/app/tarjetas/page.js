@@ -7,11 +7,6 @@ import './footer.css'
 import InstalarPWA from '../components/InstalarPWA'
 import Cookies from 'js-cookie'
 
-export const metadata = {
-  title: "Mis Tarjetas - Fidelizaaa",
-  manifest: "../../public/manifest-tarjetas.json",
-}
-
 export default function TarjetasPage() {
   const router = useRouter()
   const [usuarioId, setUsuarioId] = useState(null)
