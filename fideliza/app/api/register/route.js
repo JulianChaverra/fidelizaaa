@@ -10,17 +10,18 @@ export async function POST(req) {
     const body = await req.json()
     const { telefono, comercioToken, nombre, correo, usuarioId, autoAfiliacion } = body
 
-    // 1. Validar datos según el flujo
+    // 1. Validar requerimiento de token de comercio
     if (!comercioToken) {
       return NextResponse.json({ error: 'Falta token de comercio' }, { status: 400 })
     }
+    
     let usuario = null
 
     if (autoAfiliacion) {
       if (!usuarioId) {
         return NextResponse.json({ error: 'Falta usuarioId en autoafiliación' }, { status: 400 })
       }
-      // Buscar usuario existente por ID (NO crear)
+      // Buscar usuario existente por ID (Flujo de Autoafiliación)
       usuario = await prisma.usuario.findUnique({
         where: { id: usuarioId },
       })
@@ -28,30 +29,41 @@ export async function POST(req) {
         return NextResponse.json({ error: 'Usuario no encontrado' }, { status: 404 })
       }
     } else {
-      if (!telefono || !nombre || !correo) {
-        return NextResponse.json({ error: 'Faltan datos' }, { status: 400 })
+      if (!correo || !nombre || !telefono) {
+        return NextResponse.json({ error: 'Faltan datos obligatorios (correo, nombre, teléfono)' }, { status: 400 })
       }
-      // Buscar o crear usuario por teléfono
+
+      const cleanCorreo = correo.trim().toLowerCase()
+      const cleanTelefono = telefono.trim()
+      const cleanNombre = nombre.trim()
+
+      // 2. Prioridad en la búsqueda por CORREO ELECTRÓNICO
       usuario = await prisma.usuario.findUnique({
-        where: { telefono },
+        where: { correo: cleanCorreo },
       })
 
       if (!usuario) {
+        // Si NO existe el correo, creamos el usuario desde cero
         usuario = await prisma.usuario.create({
-          data: { telefono, nombre, correo },
+          data: { 
+            correo: cleanCorreo,
+            telefono: cleanTelefono, 
+            nombre: cleanNombre 
+          },
         })
       } else {
+        // Si SÍ existe por correo, actualizamos su teléfono y nombre con los valores actuales
         usuario = await prisma.usuario.update({
           where: { id: usuario.id },
           data: {
-            nombre: usuario.nombre || nombre,
-            correo: usuario.correo || correo,
+            telefono: cleanTelefono,
+            nombre: cleanNombre,
           },
         })
       }
     }
 
-    // 2. Decodificar el token de comercio
+    // 3. Decodificar el token de comercio
     let comercioId
     try {
       const decoded = jwt.verify(comercioToken, JWT_SECRET)
@@ -60,7 +72,7 @@ export async function POST(req) {
       return NextResponse.json({ error: 'Token de comercio inválido' }, { status: 401 })
     }
 
-    // 3. Buscar comercio por ID
+    // 4. Buscar el comercio destino
     const comercio = await prisma.comercio.findUnique({
       where: { id: comercioId },
     })
@@ -69,7 +81,7 @@ export async function POST(req) {
       return NextResponse.json({ error: 'Comercio no encontrado' }, { status: 404 })
     }
 
-    // 4. Vincular usuario a comercio si no está vinculado
+    // 5. Vincular usuario y comercio si no existe la relación
     const relacionExistente = await prisma.usuarioComercio.findUnique({
       where: {
         usuarioId_comercioId: {
@@ -88,7 +100,7 @@ export async function POST(req) {
       })
     }
 
-    // 5. Generar token seguro de usuario+comercio
+    // 6. Generar JWT de sesión para la PWA de Tarjetas
     const token = jwt.sign(
       {
         usuarioId: usuario.id,
@@ -103,7 +115,10 @@ export async function POST(req) {
       token,
     })
   } catch (error) {
-    console.error(error)
-    return NextResponse.json({ error: 'Error interno del servidor' }, { status: 500 })
+    console.error('=== ERROR AL AFILIAR/REGISTRAR USUARIO ===', error)
+    return NextResponse.json(
+      { error: 'Error interno del servidor', detalle: error.message },
+      { status: 500 }
+    )
   }
 }
