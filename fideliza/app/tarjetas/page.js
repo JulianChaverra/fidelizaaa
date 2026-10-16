@@ -7,6 +7,11 @@ import './footer.css'
 import InstalarPWA from '../components/InstalarPWA'
 import Cookies from 'js-cookie'
 
+export const metadata = {
+  title: "Mis Tarjetas - Fidelizaaa",
+  manifest: "../../public/manifest-tarjetas.json",
+}
+
 export default function TarjetasPage() {
   const router = useRouter()
   const [usuarioId, setUsuarioId] = useState(null)
@@ -80,9 +85,9 @@ export default function TarjetasPage() {
         className="logo-fideliza"
       />
       <InstalarPWA 
-        titulo="Fidelizaaa Billetera"
-        descripcion="Guarda tu tarjeta digital en tu celular para acumular puntos cada vez que visites tus comercios favoritos."
-        icono="🎁"
+        titulo="Mis Tarjetas Fidelizaaa"
+        descripcion="Accede al instante a todas tus tarjetas de puntos y beneficios guardados en tu pantalla principal."
+        icono="💳"
       />
       <p className="saludo-fideliza">
         👋 Hola {nombre}, aquí están tus comercios afiliados.

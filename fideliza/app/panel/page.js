@@ -18,6 +18,11 @@ function esColorOscuro(hex) {
   return brillo < 128
 }
 
+export const metadata = {
+  title: "Fidelizaaa - Panel Comercio",
+  manifest: "../../public/manifest-comercio.json",
+}
+
 export default function PanelInicio() {
   const router = useRouter()
   const [comercio, setComercio] = useState(null)

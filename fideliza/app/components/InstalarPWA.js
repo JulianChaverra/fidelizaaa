@@ -4,7 +4,8 @@ import { useEffect, useState } from 'react'
 
 export default function InstalarPWA({ 
   titulo = "Instala Fidelizaaa", 
-  descripcion = "Instala la aplicación directamente en tu pantalla de inicio para acceder en un solo toque sin consumir memoria."
+  descripcion = "Instala la aplicación directamente en tu pantalla de inicio para acceder en un solo toque sin consumir memoria.",
+  icono = "📱"
 }) {
   const [deferredPrompt, setDeferredPrompt] = useState(null)
   const [mostrarModal, setMostrarModal] = useState(false)
@@ -19,7 +20,7 @@ export default function InstalarPWA({
       return
     }
 
-    // 2. Detectar si es iOS (Safari)
+    // 2. Detectar si es un dispositivo iOS (iPhone/iPad)
     const userAgent = window.navigator.userAgent.toLowerCase()
     const isIosDevice = /iphone|ipad|ipod/.test(userAgent)
     setEsIOS(isIosDevice)
@@ -37,7 +38,7 @@ export default function InstalarPWA({
     }
   }, [])
 
-  // Disparar el prompt nativo
+  // Ejecutar el prompt nativo si está disponible, o abrir modal con instrucciones
   const handleInstalarClick = async () => {
     if (deferredPrompt) {
       deferredPrompt.prompt()
@@ -46,9 +47,12 @@ export default function InstalarPWA({
         setDeferredPrompt(null)
         setMostrarModal(false)
       }
+    } else {
+      setMostrarModal(true)
     }
   }
 
+  // Si la aplicación ya está instalada y ejecutándose como PWA, no renderizar nada
   if (yaInstalado) return null
 
   return (
@@ -56,8 +60,9 @@ export default function InstalarPWA({
       {/* BOTÓN FLOTANTE ESTILIZADO (Estilo Widget Nativo con Glassmorphism) */}
       <div className="pwa-btn-flotante-wrapper">
         <button
-          onClick={() => setMostrarModal(true)}
+          onClick={handleInstalarClick}
           className="pwa-btn-flotante"
+          type="button"
         >
           <div className="pwa-badge-logo">
             <img 
@@ -75,13 +80,14 @@ export default function InstalarPWA({
 
       {/* MODAL POP-UP PERSONALIZADO DE INSTALACIÓN */}
       {mostrarModal && (
-        <div className="pwa-modal-overlay">
-          <div className="pwa-modal-card">
+        <div className="pwa-modal-overlay" onClick={() => setMostrarModal(false)}>
+          <div className="pwa-modal-card" onClick={(e) => e.stopPropagation()}>
             
             {/* Botón para cerrar */}
             <button
               onClick={() => setMostrarModal(false)}
               className="pwa-btn-cerrar"
+              type="button"
             >
               ✕
             </button>
@@ -103,17 +109,21 @@ export default function InstalarPWA({
               <button
                 onClick={handleInstalarClick}
                 className="pwa-btn-confirmar"
+                type="button"
               >
                 Instalar en mi pantalla
               </button>
             )}
 
-            {/* CASO 2: Navegadores generales */}
+            {/* CASO 2: Navegadores Android / Desktop sin evento directo */}
             {!esIOS && !deferredPrompt && (
               <div className="pwa-instrucciones">
                 <p className="pwa-instruccion-titulo">Pasos para instalar:</p>
-                <p>1. Toca el menú de tu navegador <strong>(⋮ / Opciones)</strong>.</p>
-                <p>2. Selecciona <strong>"Instalar aplicación"</strong> o <strong>"Agregar a pantalla principal"</strong>.</p>
+
+                <ol className="list-decimal list-inside space-y-1 text-left">
+                  <li>Toca el menú de tu navegador <b>(⋮ / Opciones)</b>.</li>
+                  <li>Selecciona <b>"Instalar aplicación"</b> o <b>"Agregar a pantalla principal"</b>.</li>
+                </ol>
               </div>
             )}
 
@@ -121,8 +131,11 @@ export default function InstalarPWA({
             {esIOS && (
               <div className="pwa-instrucciones">
                 <p className="pwa-instruccion-titulo">Instrucciones para iPhone / Safari:</p>
-                <p>1. Presiona el botón <strong>Compartir</strong> ⎘ en la barra inferior de Safari.</p>
-                <p>2. Selecciona la opción <strong>"Agregar al inicio"</strong> ➕.</p>
+
+                <ol className="list-decimal list-inside space-y-1 text-left">
+                  <li>Presiona el botón <b>Compartir</b> ⎘ en la barra inferior de Safari.</li>
+                  <li>Selecciona la opción <b>"Agregar al inicio"</b> ➕.</li>
+                </ol>
               </div>
             )}
           </div>

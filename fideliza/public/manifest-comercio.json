@@ -1,23 +1,22 @@
 {
-    "name": "Fideliza Comercio",
-    "short_name": "Fideliza panel",
-    "description": "Tu tarjeta digital de puntos. Gana, redime y vuelve.",
-    "start_url": "/panel",
-    "display": "standalone",
-    "background_color": "#ffffff",
-    "theme_color": "#4e6d58",
-    "orientation": "portrait",
-    "icons": [
+  "name": "Fidelizaaa Comercio",
+  "short_name": "Fidelizaaa Comercio",
+  "description": "Panel administrativo para comercios de Fidelizaaa",
+  "start_url": "/panel",
+  "scope": "/panel/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#487358",
+  "icons": [
     {
-        "src": "/icon-192x192.png",
-        "sizes": "192x192",
-        "type": "image/png"
+      "src": "/iconografia.png",
+      "sizes": "192x192",
+      "type": "image/png"
     },
     {
-        "src": "/icon-512x512.png",
-        "sizes": "512x512",
-        "type": "image/png"
+      "src": "/iconografia.png",
+      "sizes": "512x512",
+      "type": "image/png"
     }
-    ]
-  }
-  
+  ]
+}
