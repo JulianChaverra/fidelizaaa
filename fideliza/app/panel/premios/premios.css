@@ -1,188 +1,359 @@
-.premios-main {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: #fff;
-    padding-bottom: 30px;
-  }
-  
-  .logo-fideliza {
-    height: 48px;
-    margin-top: 1.5rem;
-  }
-  
-  .premios-titulo {
-    font-size: 1.7rem;
-    font-weight: 700;
-    margin: 2rem 0 1rem 0;
-    color: #487358;
-    text-align: center;
-  }
-  
-  .premios-lista {
-    width: 100%;
-  }
-  
-  .premios-cards-center {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 22px;
-    justify-content: center; /* Centra horizontalmente las cards */
-    align-items: flex-start;
-    margin-bottom: 2.3rem;
-  }
-  
-  .premios-vacio {
-    color: #7a7a7a;
-    text-align: center;
-    font-size: 1.1rem;
-    margin: 2rem 0;
-  }
-  
-  .premio-card {
-    background: #ececec;
-    border-radius: 13px;
-    box-shadow: 0 3px 12px 0 rgba(0,0,0,0.07);
-    padding: 1.2rem 1rem 1rem 1rem;
-    width: 220px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-  }
+/* =========================================================
+   ESTILOS GESTIÓN Y CONFIGURACIÓN DE PREMIOS (FIDELIZAAA)
+   ========================================================= */
 
-  .premio-card h3 {
-    color: #487358;
-    font-size: 1.2rem;
-    font-weight: 700;
-  }
-  
-  .premio-img {
-    width: 70px;
-    height: 70px;
-    object-fit: contain;
-    border-radius: 9px;
-    margin-bottom: 1rem;
-    background: #eee;
-  }
-  
-  .premio-input {
-    width: 100%;
-    padding: 0.5rem 0.7rem;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-    margin: 0.4rem 0;
-  }
-  
-  .premio-puntos {
-    color: #000000;
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-    margin-top: 0.4rem;
-    font-weight: 700;
-  }
-  
-  .premio-actions {
-    display: flex;
-    gap: 0.6rem;
-    margin-top: 0.5rem;
-  }
-  
-  .premio-btn {
-    background: #487358;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    padding: 0.47rem 0.85rem;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.18s;
-  }
-  
-  .premio-btn.guardar {
-    background: #287e4e;
-  }
-  
-  .premio-btn.cancelar {
-    background: #bbb;
-    color: #333;
-  }
-  
-  .premio-btn.eliminar {
-    background: #cb2227;
-    color: #fff;
-  }
-  
-  .premio-btn.editar {
-    background: #f0c041;
-    color: #222;
-  }
-  
-  .premio-btn.crear {
-    background: #287e4e;
-    margin-top: 1rem;
-    width: 100%;
-  }
-  
-  .premios-nuevo {
-    background: #ececec;
-    border-radius: 13px;
-    box-shadow: 0 3px 12px 0 rgba(0,0,0,0.07);
-    padding: 1.3rem 1rem 1.5rem 1rem;
-    width: 320px;
-    margin: 0 auto;
-    margin-top: 2.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .premios-nuevo h3 {
-    color: #487358;
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-  }
-  
-  .premios-mensaje {
-    text-align: center;
-    color: #287e4e;
-    margin-top: 1.7rem;
-    font-size: 1.13rem;
-    font-weight: 600;
-  }
-  
-  .footer-fideliza {
-    margin-top: auto;
-    width: 100%;
-    text-align: center;
-    padding: 1.3rem 0 0.3rem 0;
-    font-size: 1rem;
-    color: #aaa;
-    letter-spacing: 0.01em;
-  }
-  
-  .premios-volver {
-    background: #487358;
-    color: #ffffff;
-    font-size: 1rem;
-    font-weight: 600;
-    border: none;
-    border-radius: 10px;
-    padding: 0.6rem 1.2rem;
-    margin-top: 1.2rem;
-    margin-bottom: 0.5rem;
-    cursor: pointer;
-    transition: background 0.17s;
-    align-self: flex-start;
-    margin-left: 16px;
-    box-shadow: 0 1px 5px 0 rgba(255, 255, 255, 0.04);
-  }
-  .premios-volver:hover {
-    background: #ffe08a;
-  }
-  
+.premios-main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 1.5rem 1rem 2.5rem 1rem;
+  max-width: 480px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+/* Logo Superior */
+.logo-fideliza {
+  height: 52px;
+  object-fit: contain;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Botón Volver al Panel */
+.premios-volver {
+  background-color: #487358;
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
+  padding: 0.6rem 1.2rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.premios-volver:hover {
+  background-color: #365b45;
+}
+
+.premios-volver:active {
+  transform: scale(0.97);
+}
+
+/* Título de Sección */
+.premios-titulo {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #3b6e52;
+  text-align: center;
+  margin: 0.5rem 0 1.5rem 0;
+}
+
+/* Listado de Premios */
+.premios-lista {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.premios-vacio {
+  color: #64748b;
+  text-align: center;
+  font-size: 0.95rem;
+  padding: 1.5rem 1rem;
+  background-color: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 14px;
+}
+
+.premios-cards-center {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+/* Tarjeta Individual de Premio */
+.premio-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  padding: 1.25rem 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.premio-card h3 {
+  color: #2c3e35;
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin: 0.2rem 0;
+  text-align: center;
+}
+
+/* Imagen del Premio */
+.premio-img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Puntos */
+.premio-puntos {
+  color: #3b6e52;
+  font-size: 1.15rem;
+  font-weight: 800;
+  margin: 0.3rem 0 0.8rem 0;
+  background-color: #eaf5d3;
+  padding: 0.2rem 0.8rem;
+  border-radius: 20px;
+}
+
+/* Inputs de Formulario */
+.premio-input {
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  border-radius: 12px;
+  border: 1px solid #cbd5e1;
+  font-size: 0.9rem;
+  margin: 0.4rem 0;
+  box-sizing: border-box;
+  outline: none;
+  background-color: #ffffff;
+  transition: border-color 0.2s ease;
+}
+
+.premio-input:focus {
+  border-color: #487358;
+}
+
+/* Botones de Acción dentro de Cards */
+.premio-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.8rem;
+  width: 100%;
+  justify-content: center;
+}
+
+.premio-btn {
+  background: #487358;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 0.55rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+  flex: 1;
+  text-align: center;
+}
+
+.premio-btn:active {
+  transform: scale(0.97);
+}
+
+.premio-btn.guardar {
+  background: #287e4e;
+}
+
+.premio-btn.guardar:hover {
+  background: #1e633d;
+}
+
+.premio-btn.cancelar {
+  background: #94a3b8;
+  color: #ffffff;
+}
+
+.premio-btn.cancelar:hover {
+  background: #64748b;
+}
+
+.premio-btn.eliminar {
+  background: #dc2626;
+  color: #ffffff;
+}
+
+.premio-btn.eliminar:hover {
+  background: #b91c1c;
+}
+
+.premio-btn.editar {
+  background: #eab308;
+  color: #1e293b;
+}
+
+.premio-btn.editar:hover {
+  background: #ca8a04;
+}
+
+/* Formulario Nuevo Premio */
+.premios-nuevo {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem 1.2rem;
+  width: 100%;
+  margin-top: 1.5rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.premios-nuevo h3 {
+  color: #3b6e52;
+  font-size: 1.2rem;
+  font-weight: 800;
+  margin-top: 0;
+  margin-bottom: 0.8rem;
+  text-align: center;
+}
+
+.premio-btn.crear {
+  background: #3b6e52;
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 800;
+  margin-top: 1rem;
+  padding: 0.8rem 1.2rem;
+  border-radius: 12px;
+  width: 100%;
+}
+
+.premio-btn.crear:hover {
+  background: #2c533e;
+}
+
+/* Mensajes de Notificación */
+.premios-mensaje {
+  text-align: center;
+  color: #16a34a;
+  background-color: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  margin-top: 1.2rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Integración del PremioUploader / LogoUploader */
+.logo-uploader-container {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.logo-uploader-label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #475569;
+  margin-bottom: 0.4rem;
+  text-align: left;
+}
+
+.logo-uploader-box {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  background-color: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  padding: 0.6rem;
+  border-radius: 12px;
+}
+
+.logo-uploader-preview {
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.logo-uploader-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.logo-uploader-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-uploader-icon {
+  font-size: 1.1rem;
+}
+
+.logo-uploader-text {
+  font-size: 0.6rem;
+  color: #64748b;
+}
+
+.logo-uploader-btn {
+  flex: 1;
+  cursor: pointer;
+  background-color: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 0.5rem 0.8rem;
+  text-align: center;
+  transition: background-color 0.2s ease;
+}
+
+.logo-uploader-btn:hover {
+  background-color: #f1f5f9;
+}
+
+.logo-uploader-input-file {
+  display: none;
+}
+
+.logo-uploader-btn-content {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #334155;
+}
+
+/* Footer */
+.footer-fideliza {
+  margin-top: auto;
+  width: 100%;
+  text-align: center;
+  padding: 2rem 0 0.2rem 0;
+  font-size: 0.88rem;
+  color: #94a3b8;
+}

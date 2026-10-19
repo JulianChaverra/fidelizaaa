@@ -8,61 +8,78 @@ export default function LandingFideliza() {
   
   return (
     <main className="landing-main">
-      {/* Hero */} 
+      {/* Hero Principal */} 
       <header className="landing-hero">
         <img src="/logo-fideliza.png" alt="Fideliza" className="landing-logo" />
-        <h1 className="landing-titulo">Fideliza: Más que puntos, clientes recurrentes</h1>
+        
+        {/* Badge del Modelo de Negocio */}
+        <div className="landing-badge-promo">
+          🎉 Gratis para siempre hasta 20 usuarios afiliados
+        </div>
+
+        <h1 className="landing-titulo">Fideliza: Más que puntos, clientes que siempre vuelven</h1>
         <p className="landing-subtitulo">
           La plataforma de fidelización 100% digital para tu negocio.<br />
           Sin tarjetas físicas, sin plásticos y activa en solo 2 minutos.
         </p>
-        <button
-          className="landing-btn-principal"
-          onClick={() => router.push("/panel/registro")}
-        >
-          Registra tu comercio ahora
-        </button>
+
+        <div className="landing-cta-hero-group">
+          <button
+            className="landing-btn-principal"
+            onClick={() => router.push("/panel/registro")}
+          >
+            🚀 Registra tu comercio gratis
+          </button>
+          <span className="landing-hero-subnota">Empieza sin pagar nada · Sin tarjetas de crédito</span>
+        </div>
       </header>
 
-      {/* Precio Único e Instantáneo (Zero-Touch) */}
+      {/* Explicación Transparente del Modelo Gratis -> $9.900 */}
       <section className="landing-precioqr">
         <p className="precio-nota">
-          Olvídate de pagar comisiones adicionales por cada cliente o cambiar de plan cuando tu negocio crezca.<br />
-          Tarifa única y transparente para todo tipo de comercio.
+          Empieza a fidelizar clientes sin gastar un solo peso. <br />
+          Tus primeros 20 clientes afiliados son totalmente gratis, para siempre.
         </p>
         
         <div className="precio-card">
+          <span className="precio-tag-oferta">PLAN TRANSPARENTE</span>
+          
           <h2 className="precio-mensual">
-            Plan Único Fideliza: $9.900 <span>COP / mes</span>
+            $0 COP <span>(Primeros 20 clientes gratis)</span>
           </h2>
           <p className="precio-nota">
-            Sin contratos de permanencia, cancela cuando quieras. Todo incluido desde el primer día.
+            Al superar los 20 clientes afiliados, continúas con interacciones ilimitadas por solo <strong>$9.900 COP / mes</strong>. Sin permanencia.
           </p>
 
           <table className="tabla-planes">
             <thead>
               <tr>
-                <th>Plan</th>
+                <th>Capacidad</th>
                 <th>Clientes afiliados</th>
                 <th>Precio mensual</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Fidelizaaa</strong></td>
+                <td><strong>Plan Inicial</strong></td>
+                <td>Hasta 20 clientes</td>
+                <td><strong style={{ color: '#3b6e52' }}>$0 COP (Gratis)</strong></td>
+              </tr>
+              <tr>
+                <td><strong>Plan Crecimiento</strong></td>
                 <td><strong>Ilimitados</strong></td>
-                <td><strong>$9.900 COP</strong></td>
+                <td><strong>$9.900 COP / mes</strong></td>
               </tr>
             </tbody>
           </table>
 
           <ul>
-            <li>✓ Generador de Código QR Digital instantáneo</li>
-            <li>✓ Aplicación movil para clientes y comercio</li>
-            <li>✓ Carga y redención de puntos ilimitada</li>
-            <li>✓ Notificaciones y campañas para reactivar clientes</li>
-            <li>✓ Panel de control y analíticas de tu comercio</li>
-            <li>✓ Cero espera: Listo para usar inmediatamente tras registrarte</li>
+            <li>✓ <b>Código QR Digital instantáneo</b> para tu mostrador</li>
+            <li>✓ Aplicación PWA para ti y tus clientes (sin descargas de App Store)</li>
+            <li>✓ Carga y redención de puntos en tiempo real</li>
+            <li>✓ Módulo de analíticas y exportación de base de datos a CSV</li>
+            <li>✓ Panel administrativo fácil e intuitivo</li>
+            <li>✓ Activación inmediata tras completar el registro</li>
           </ul>
 
           <div className="qr-demo-imgs">
@@ -74,48 +91,48 @@ export default function LandingFideliza() {
 
       {/* Problema - Solución */}
       <section className="landing-problema">
-        <h2>¿Tus clientes compran y no vuelven?</h2>
+        <h2>¿Tus clientes compran una vez y no regresan?</h2>
         <p>
-          La mayoría de los comercios pierden hasta el 70% de sus compradores ocasionales por no tener un programa de retención activo.<br /><br />
-          <strong>Fideliza</strong> te permite crear tu propio club de puntos digital en minutos, motivando a tus clientes a regresar una y otra vez sin invertir en costosa publicidad o equipos.
+          La mayoría de los comercios pierden hasta el 70% de sus compradores ocasionales por no contar con un programa de retención activo.<br /><br />
+          Con <strong>Fideliza</strong> creas tu club de puntos digital en minutos, motivando a tus clientes a regresar sin invertir en costosos equipos ni publicidad.
         </p>
       </section>
 
-      {/* Beneficios */}
+      {/* Beneficios Clave */}
       <section className="landing-beneficios">
         <h2>¿Por qué elegir Fideliza?</h2>
         <div className="beneficios-lista">
           <div className="beneficio-card">
+            <span className="emoji">🎁</span>
+            <p><strong>Gratis Inicial</strong><br />Tus primeros 20 clientes no te cuestan nada</p>
+          </div>
+          <div className="beneficio-card">
             <span className="emoji">⚡</span>
-            <p>Onboarding Instantáneo<br />Paga y empieza hoy</p>
+            <p><strong>Puesta en Marcha</strong><br />Crea tu cuenta y empieza a usarlo en 2 minutos</p>
           </div>
           <div className="beneficio-card">
             <span className="emoji">📱</span>
-            <p>100% Digital en la nube<br />Tus clientes no instalan apps</p>
-          </div>
-          <div className="beneficio-card">
-            <span className="emoji">🎁</span>
-            <p>Reglas de puntos<br />y premios a tu medida</p>
+            <p><strong>100% Digital</strong><br />Tus clientes acumulan puntos usando solo su cámara</p>
           </div>
           <div className="beneficio-card">
             <span className="emoji">📊</span>
-            <p>Panel de estadísticas<br />y métricas en vivo</p>
+            <p><strong>CRM & Estadísticas</strong><br />Identifica clientes VIP e inactivos al instante</p>
           </div>
           <div className="beneficio-card">
             <span className="emoji">💸</span>
-            <p>Tarifa plana $9.900<br />Sin cobros ocultos</p>
+            <p><strong>Tarifa Plana $9.900</strong><br />Sin cobros sorpresa al escalar tu negocio</p>
           </div>
         </div>
       </section>
 
-      {/* Cómo funciona (Zero-Touch) */}
+      {/* Paso a Paso */}
       <section className="landing-comofunciona">
         <h2>¿Cómo funciona?</h2>
         <ol>
-          <li>1- Registra tu comercio y activa tu plan por solo $9.900 COP al mes.</li>
-          <li>2- Genera y descarga tu código QR oficial directamente desde tu panel.</li>
-          <li>3- Pon tu QR en el mostrador (impreso o en pantalla) para que tus clientes lo escaneen desde su celular.</li>
-          <li>4- Otorga puntos por compras, redime premios y fideliza a tus clientes al instante.</li>
+          <li>1- Registra tu comercio gratis (incluye hasta 20 clientes).</li>
+          <li>2- Descarga e imprime tu código QR desde el panel.</li>
+          <li>3- Pon tu QR en el mostrador para que tus clientes lo escaneen.</li>
+          <li>4- Otorga puntos, redime premios y fideliza a tu comunidad.</li>
         </ol>
       </section>
 
@@ -123,19 +140,20 @@ export default function LandingFideliza() {
       <section className="landing-demo">
         <img src="/demo-fideliza.png" alt="Cliente usando Fideliza" className="landing-demo-img" />
         <p className="landing-demo-desc">
-          Tus clientes solo necesitan la cámara de su celular. Así de rápido y fácil es sumar lealtad a tu negocio.
+          Tus clientes no necesitan instalar aplicaciones pesadas. Solo abren la cámara de su celular, escanean y acumulan.
         </p>
       </section>
 
       {/* CTA Final */}
       <section className="landing-cta">
+        <h2>¿Listo para hacer crecer tu negocio?</h2>
         <button
           className="landing-btn-principal"
           onClick={() => router.push("/panel/registro")}
         >
-          Registra tu comercio por $9.900/mes
+          🚀 Registra tu comercio gratis
         </button>
-        <span className="landing-cta-nota">Puesta en marcha en 2 minutos. ¡Potencia tu negocio hoy mismo!</span>
+        <span className="landing-cta-nota">Puesta en marcha en 2 minutos. ¡Gratis hasta 20 usuarios!</span>
       </section>
 
       <footer className="landing-footer">

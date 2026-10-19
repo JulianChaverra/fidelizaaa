@@ -3,23 +3,26 @@ import { useEffect, useState } from "react"
 import Cookies from "js-cookie"
 import './premios.css'
 import { useRouter } from "next/navigation"
+import PremioUploader from "../../components/PremioUploader"
 
 export default function PremiosPanel() {
-    const router = useRouter()
-    const [premios, setPremios] = useState([])
-    const [editando, setEditando] = useState(null)
-    const [nuevo, setNuevo] = useState({ nombre: '', imagenUrl: '', valorpuntos: '' })
-    const [mensaje, setMensaje] = useState('')
-    const comercioToken = Cookies.get('fidelizaComercioToken')
-    const [comercioId, setComercioId] = useState('')
+  const router = useRouter()
+  const [premios, setPremios] = useState([])
+  const [editando, setEditando] = useState(null)
+  const [nuevo, setNuevo] = useState({ nombre: '', imagenUrl: '', valorpuntos: '' })
+  const [mensaje, setMensaje] = useState('')
+  const comercioToken = Cookies.get('fidelizaComercioToken')
+  const [comercioId, setComercioId] = useState('')
 
-  // Obtener el comercioId del token (ajusta según tu lógica)
+  // Obtener el comercioId del token JWT
   useEffect(() => {
     if (!comercioToken) return
     try {
       const data = JSON.parse(atob(comercioToken.split('.')[1]))
       setComercioId(data.comercioId)
-    } catch { }
+    } catch (err) {
+      console.error("Error al decodificar token de comercio:", err)
+    }
   }, [comercioToken])
 
   useEffect(() => {
@@ -27,18 +30,22 @@ export default function PremiosPanel() {
   }, [comercioId])
 
   const cargarPremios = async () => {
-    const res = await fetch('/api/panel/premios/listar', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ comercioId })
-    })
-    const data = await res.json()
-    setPremios(
-      (data.premios || []).map(p => ({
-        ...p,
-        valorpuntos: p.valorpuntos ?? p.valorPuntos ?? ''
-      }))
-    )
+    try {
+      const res = await fetch('/api/panel/premios/listar', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ comercioId })
+      })
+      const data = await res.json()
+      setPremios(
+        (data.premios || []).map(p => ({
+          ...p,
+          valorpuntos: p.valorpuntos ?? p.valorPuntos ?? ''
+        }))
+      )
+    } catch (err) {
+      console.error("Error cargando premios:", err)
+    }
   }
 
   const guardarPremio = async () => {
@@ -60,6 +67,7 @@ export default function PremiosPanel() {
       setNuevo({ nombre: '', imagenUrl: '', valorpuntos: '' })
       setMensaje('Premio creado')
       cargarPremios()
+      setTimeout(() => setMensaje(''), 3000)
     } else {
       setMensaje('Error al crear premio')
     }
@@ -86,6 +94,7 @@ export default function PremiosPanel() {
       setEditando(null)
       setMensaje('Premio actualizado')
       cargarPremios()
+      setTimeout(() => setMensaje(''), 3000)
     } else {
       setMensaje('Error al actualizar premio')
     }
@@ -101,6 +110,7 @@ export default function PremiosPanel() {
     if (res.ok) {
       setMensaje('Premio eliminado')
       cargarPremios()
+      setTimeout(() => setMensaje(''), 3000)
     } else {
       setMensaje('Error al eliminar premio')
     }
@@ -118,12 +128,12 @@ export default function PremiosPanel() {
 
   return (
     <main className="premios-main">
-        
       <img src="/logo-fideliza.png" alt="Fideliza" className="logo-fideliza" />
       <button className="premios-volver" onClick={() => router.push('/panel')}>
         ← Volver al panel
       </button>
       <h2 className="premios-titulo">Configuración de premios</h2>      
+
       <section className="premios-lista">
         {premios.length === 0 && <div className="premios-vacio">Aún no tienes premios configurados.</div>}
         <div className="premios-cards-center">
@@ -143,13 +153,18 @@ export default function PremiosPanel() {
                     value={premio.nombre ?? ''}
                     onChange={e => handleEdit(premio.id, "nombre", e.target.value)}
                     className="premio-input"
+                    placeholder="Nombre del premio"
                   />
-                  <input
+
+                  {/* Componente independiente para editar la foto del premio */}
+                  <PremioUploader
                     value={premio.imagenUrl ?? ''}
-                    onChange={e => handleEdit(premio.id, "imagenUrl", e.target.value)}
-                    className="premio-input"
-                    placeholder="URL imagen"
+                    onChange={url => handleEdit(premio.id, "imagenUrl", url)}
+                    comercioId={comercioId}
+                    nombrePremio={premio.nombre}
+                    label="Cambiar imagen del premio"
                   />
+
                   <input
                     value={premio.valorpuntos ?? ''}
                     type="number"
@@ -166,7 +181,7 @@ export default function PremiosPanel() {
                 </>
               ) : (
                 <>
-                  <h3 >{premio.nombre}</h3>
+                  <h3>{premio.nombre}</h3>
                   <div className="premio-puntos">{premio.valorpuntos} puntos</div>
                   <div className="premio-actions">
                     <button onClick={() => setEditando(premio.id)} className="premio-btn editar">Editar</button>
@@ -184,15 +199,19 @@ export default function PremiosPanel() {
         <input
           value={nuevo.nombre ?? ''}
           onChange={e => setNuevo(n => ({ ...n, nombre: e.target.value }))}
-          placeholder="Nombre"
+          placeholder="Nombre del premio"
           className="premio-input"
         />
-        <input
+
+        {/* Componente independiente para subir la foto del nuevo premio */}
+        <PremioUploader
           value={nuevo.imagenUrl ?? ''}
-          onChange={e => setNuevo(n => ({ ...n, imagenUrl: e.target.value }))}
-          placeholder="URL imagen"
-          className="premio-input"
+          onChange={url => setNuevo(n => ({ ...n, imagenUrl: url }))}
+          comercioId={comercioId}
+          nombrePremio={nuevo.nombre}
+          label="Foto del premio"
         />
+
         <input
           value={nuevo.valorpuntos ?? ''}
           type="number"
@@ -203,6 +222,7 @@ export default function PremiosPanel() {
         />
         <button onClick={guardarPremio} className="premio-btn crear">Agregar un nuevo premio</button>
       </section>
+
       <div className="premios-mensaje">{mensaje}</div>
       <footer className="footer-fideliza">Fideliza · Gana puntos, redime experiencias</footer>
     </main>

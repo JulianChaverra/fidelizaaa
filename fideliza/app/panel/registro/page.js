@@ -1,15 +1,18 @@
 'use client'
 
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import BotonPagoWompi from "../../components/BotonPagoWompi"
 import LogoUploader from "../../components/LogoUploader"
 import "./registro.css"
 
 const VALOR_BASE = 9900
+const CUPON_DEFAULT = "FIDELIZA20" // Código que otorga los 20 clientes gratis ($0 COP)
 
 export default function RegistroComercio() {
   const router = useRouter()
+  
+  // 1. Inicializamos el estado del formulario con el código de descuento predefinido
   const [form, setForm] = useState({
     nombre: "",
     slug: "",
@@ -21,16 +24,19 @@ export default function RegistroComercio() {
     correoContacto: "",
     celularContacto: "",
     logoUrl: "",
-    color: "#5f4b32",
-    codigoReferido: ""
+    color: "#3b6e52",
+    codigoReferido: CUPON_DEFAULT
   })
+
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
   const [yaRegistrado, setYaRegistrado] = useState(false)
   const [slugDuplicado, setSlugDuplicado] = useState(false)
   const [wompiConfig, setWompiConfig] = useState(null)
   const [codigoReferidoError, setCodigoReferidoError] = useState("")
-  const [valorAPagar, setValorAPagar] = useState(VALOR_BASE)
+  
+  // 2. Inicializamos el valor a pagar en 0 de forma predeterminada
+  const [valorAPagar, setValorAPagar] = useState(0)
   const [registroExitoso, setRegistroExitoso] = useState(false)
   const [qrUrl, setQrUrl] = useState(null)
   const errorRef = useRef(null)
@@ -38,7 +44,6 @@ export default function RegistroComercio() {
   // Validar código de referido en backend y actualizar monto
   const validarCodigoReferido = async (codigo) => {
     setCodigoReferidoError("")
-    setValorAPagar(VALOR_BASE)
 
     if (!codigo) {
       setCodigoReferidoError("")
@@ -55,26 +60,52 @@ export default function RegistroComercio() {
       const data = await res.json()
       if (data.success) {
         setCodigoReferidoError("")
-        setValorAPagar(data.valorAPagar ?? VALOR_BASE)
+        setValorAPagar(data.valorAPagar ?? 0)
       } else {
         setCodigoReferidoError(data.error || "Código no válido")
         setValorAPagar(VALOR_BASE)
       }
     } catch (err) {
+      console.error("Error al validar cupón:", err)
       setCodigoReferidoError("Error validando el código")
       setValorAPagar(VALOR_BASE)
     }
   }
 
+  // 3. EFECTO DE CARGA INICIAL: ejecuta la validación del cupón automáticamente al cargar la vista
+  useEffect(() => {
+    if (CUPON_DEFAULT) {
+      validarCodigoReferido(CUPON_DEFAULT)
+    }
+  }, [])
+
   const handleChange = async (e) => {
     const { name, value } = e.target
-    setForm({ ...form, [name]: value })
+
+    setForm((prev) => {
+      const updated = { ...prev, [name]: value }
+
+      // Generación automática del slug si el usuario escribe el nombre
+      if (name === "nombre" && !form.slug) {
+        updated.slug = value
+          .toLowerCase()
+          .trim()
+          .replace(/[^a-z0-9-]/g, "-")
+          .replace(/-+/g, "-")
+      }
+
+      return updated
+    })
+
     if (name === "slug") setSlugDuplicado(false)
 
+    // Si el usuario edita o borra el código de referido manualmente
     if (name === "codigoReferido") {
-      setForm({ ...form, codigoReferido: value.trim() })
-      if (value.trim()) {
-        await validarCodigoReferido(value.trim())
+      const codigoLimpio = value.trim()
+      setForm((prev) => ({ ...prev, codigoReferido: codigoLimpio }))
+
+      if (codigoLimpio) {
+        await validarCodigoReferido(codigoLimpio)
       } else {
         setCodigoReferidoError("")
         setValorAPagar(VALOR_BASE)
@@ -82,7 +113,7 @@ export default function RegistroComercio() {
     }
   }
 
-  // Callback para actualizar la URL devuelta por Vercel Blob en el estado del formulario
+  // Callback para la carga directa de imagen a Vercel Blob Storage
   const handleLogoChange = (url) => {
     setForm((prev) => ({ ...prev, logoUrl: url }))
   }
@@ -107,13 +138,13 @@ export default function RegistroComercio() {
       const data = await res.json()
 
       if (data.success && data.comercioId) {
-        // Si es exento de pago (requierePago: false), mostramos éxito, QR y botón login
-        if (data.requierePago === false) {
+        // Si el monto a pagar es $0 o el backend marca exención (requierePago: false)
+        if (data.requierePago === false || valorAPagar === 0) {
           setRegistroExitoso(true)
           setQrUrl(data.qrUrl || null)
           setWompiConfig(null)
         } else {
-          // 2. Crear pago pendiente y obtener config
+          // 2. Si el valor a pagar fuera mayor a 0, se genera el pago en Wompi
           const pagoRes = await fetch("/api/pagos/crear", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -145,12 +176,14 @@ export default function RegistroComercio() {
         } else {
           setError(data.error || "Error desconocido")
         }
+
         setTimeout(() => {
           if (errorRef.current) errorRef.current.scrollIntoView({ behavior: 'smooth' })
         }, 100)
       }
     } catch (err) {
-      setError("Error de red")
+      console.error(err)
+      setError("Error de red al procesar el registro")
       setTimeout(() => {
         if (errorRef.current) errorRef.current.scrollIntoView({ behavior: 'smooth' })
       }, 100)
@@ -162,20 +195,29 @@ export default function RegistroComercio() {
   return (
     <main className="registro-main">
       <img src="/logo-fideliza.png" alt="Fideliza" className="registro-logo" />
-      <h1>Registra tu comercio</h1>
+      <h1>Registra tu comercio gratis</h1>
 
       {error && (
         <>
           <p className="registro-error" ref={errorRef}>{error}</p>
           {yaRegistrado && (
-            <button className="registro-login-boton" onClick={() => router.push("/panel/login")}>Iniciar sesión</button>
+            <button className="registro-login-boton" onClick={() => router.push("/panel/login")}>
+              Iniciar sesión
+            </button>
           )}
         </>
       )}
 
       {!yaRegistrado && !wompiConfig && !registroExitoso && (
         <form onSubmit={handleSubmit} className="registro-form">
-          <input name="nombre" placeholder="Nombre del comercio" value={form.nombre} onChange={handleChange} required />
+          <input 
+            name="nombre" 
+            placeholder="Nombre del comercio" 
+            value={form.nombre} 
+            onChange={handleChange} 
+            required 
+          />
+
           <input
             name="slug"
             placeholder="Nombre corto (ej. hojarasca)"
@@ -185,17 +227,17 @@ export default function RegistroComercio() {
             style={slugDuplicado ? { border: '1px solid red' } : {}}
           />
 
-          <label htmlFor="color">Color de tu marca</label>
+          <label htmlFor="color">Color distintivo de tu marca</label>
           <div className="registro-color">
             <input name="color" type="color" id="color" value={form.color} onChange={handleChange} />
-            <input name="color" type="text" value={form.color} onChange={handleChange} placeholder="#5f4b32" />
+            <input name="color" type="text" value={form.color} onChange={handleChange} placeholder="#3b6e52" />
             <span className="color-preview" style={{ backgroundColor: form.color }}></span>
           </div>
 
           <input
             name="codigoReferido"
-            placeholder="Código de referido (opcional)"
-            value={form.codigoReferido || ""}
+            placeholder="Código de referido o cupón"
+            value={form.codigoReferido}
             onChange={handleChange}
             className={codigoReferidoError ? "campo-error" : ""}
             autoComplete="off"
@@ -212,20 +254,27 @@ export default function RegistroComercio() {
 
           <input name="numeroDocumento" placeholder="Número de documento" value={form.numeroDocumento} onChange={handleChange} required />
           <input name="celular" placeholder="Celular del comercio" value={form.celular} onChange={handleChange} required />
-          <input name="correo" placeholder="Correo del comercio" value={form.correo} onChange={handleChange} required />
+          <input name="correo" type="email" placeholder="Correo del comercio" value={form.correo} onChange={handleChange} required />
           <input name="nombreContacto" placeholder="Nombre del contacto" value={form.nombreContacto} onChange={handleChange} required />
-          <input name="correoContacto" placeholder="Correo del contacto" value={form.correoContacto} onChange={handleChange} required />
+          <input name="correoContacto" type="email" placeholder="Correo del contacto" value={form.correoContacto} onChange={handleChange} required />
           <input name="celularContacto" placeholder="Celular del contacto" value={form.celularContacto} onChange={handleChange} required />
           
-          {/* Carga directa de imagen a Vercel Blob Storage */}
+          {/* Componente LogoUploader */}
           <LogoUploader 
             value={form.logoUrl} 
             onChange={handleLogoChange} 
+            comercioSlug={form.slug || form.nombre}
             label="Logo del comercio (opcional)"
           />
 
+          {/* Indicador de Valor a Pagar con Cupón Preaplicado */}
           <div className="registro-valor-pagar">
-            Valor a pagar: <b>{valorAPagar === 0 ? "GRATIS" : `$${valorAPagar.toLocaleString('es-CO')}`}</b>
+            Valor a pagar: <b>{valorAPagar === 0 ? "GRATIS ($0 COP)" : `$${valorAPagar.toLocaleString('es-CO')} COP`}</b>
+            {valorAPagar === 0 && (
+              <span style={{ display: 'block', fontSize: '0.8rem', color: '#3b6e52', marginTop: '0.2rem', fontWeight: 600 }}>
+                ✓ Cupón activado: Incluye hasta 20 clientes afiliados para siempre.
+              </span>
+            )}
           </div>
 
           <p className="afiliar-politica-link">
@@ -237,22 +286,23 @@ export default function RegistroComercio() {
               términos y condiciones
             </a>.
           </p>
+
           <button
             type="submit"
             disabled={loading || !!codigoReferidoError}
           >
-            {loading ? "Registrando..." : "Registrar mi comercio y realizar pago"}
+            {loading ? "Registrando..." : (valorAPagar === 0 ? "🚀 Registrar mi comercio gratis" : "Registrar mi comercio y realizar pago")}
           </button>
         </form>
       )}
 
-      {/* REGISTRO EXITOSO SIN PAGO */}
+      {/* VISTA DE REGISTRO EXITOSO SIN PAGO */}
       {registroExitoso && !wompiConfig && (
         <section className="registro-exito">
-          <h2>¡Registro exitoso!</h2>
+          <h2>¡Registro exitoso! 🎉</h2>
           <p>
-            Tu comercio ha sido registrado y activado de inmediato gracias al código de gratuidad.<br />
-            Ya puedes iniciar sesión en tu panel para empezar a afiliar clientes y gestionar tu programa de fidelización.
+            Tu comercio ha sido registrado y activado de inmediato con capacidad gratuita para tus primeros 20 clientes afiliados.<br />
+            Ya puedes iniciar sesión en tu panel para comenzar.
           </p>
           {qrUrl && (
             <img src={qrUrl} alt="QR afiliación" className="registro-qr" />
@@ -262,12 +312,12 @@ export default function RegistroComercio() {
             onClick={() => router.push("/panel/login")}
             style={{ marginTop: "1em" }}
           >
-            Iniciar sesión
+            Iniciar sesión en mi panel
           </button>
         </section>
       )}
 
-      {/* FLUJO DE PAGO NORMAL */}
+      {/* FLUJO DE PAGO WOMPI (Si el valor a pagar es > 0) */}
       {wompiConfig && (
         <BotonPagoWompi config={wompiConfig} />
       )}
