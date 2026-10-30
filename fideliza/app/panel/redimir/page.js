@@ -1,13 +1,13 @@
 'use client'
 
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Cookies from 'js-cookie'
 import QrScanner from '../../components/QrScanner'
 import './redimir.css'
 import jwt_encode from "jwt-encode"
 
-export default function CargaPuntos() {
+export default function RedimirPuntos() {
   const router = useRouter()
   const [usuario, setUsuario] = useState(null)
   const [puntos, setPuntos] = useState('')
@@ -22,19 +22,16 @@ export default function CargaPuntos() {
   const [tokenUser, setTokenUser] = useState('')
   const [puntosActualizados, setPuntosActualizados] = useState(null)
 
-  // Asignar un ID único y estable para el contenedor del escáner
   useEffect(() => {
     setScannerId('qr-reader-comercio-container')
   }, [])
 
-  // Validar sesión de comercio
   useEffect(() => {
     if (!comercioToken) {
       router.push('/panel/login')
     }
   }, [comercioToken, router])
 
-  // Manejo de errores de cámara (especialmente útil para WebView/Permisos denegados)
   const handleError = (err) => {
     console.warn('Error en escáner QR / WebView:', err)
     if (typeof err === 'string' && (err.includes('Permission') || err.includes('NotAllowedError'))) {
@@ -43,7 +40,6 @@ export default function CargaPuntos() {
     }
   }
 
-  // Cuando se escanea un QR válido
   const handleScan = async (decodedText) => {
     setMensaje('Procesando...')
     let token = decodedText
@@ -74,19 +70,28 @@ export default function CargaPuntos() {
     }
   }
 
-  const cargarPuntos = async () => {
-    setLoading(true)
+  const procesarRedencion = async () => {
     setMensaje('')
+    const cantidadARedimir = parseInt(puntos)
+
+    // Validación rápida en el frontend antes de golpear el backend
+    if (cantidadARedimir > usuario.puntos) {
+      setMensaje('El usuario no tiene suficientes puntos para esta redención.')
+      return
+    }
+
+    setLoading(true)
 
     const payload = {
-      puntos: parseInt(puntos),
+      puntos: cantidadARedimir,
       timestamp: Date.now()
     }
 
     const token = jwt_encode(payload, JWT_SECRET)
 
     try {
-      const res = await fetch('/api/panel/cargar', {
+      // Consumo del endpoint correcto para redimir
+      const res = await fetch('/api/panel/redimir', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -94,20 +99,16 @@ export default function CargaPuntos() {
           tokenUser
         })
       })
+      
       const data = await res.json()
+      
       if (data.success) {
-        await fetch('/api/push/carga', {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            tokenUser,
-            puntos
-          })
-        })
-        setMensaje('¡Puntos cargados exitosamente!')
+        // Si tienes un endpoint de push para redenciones, puedes llamarlo aquí
+        // await fetch('/api/push/redencion', { ... })
+        setMensaje('¡Puntos redimidos exitosamente!')
         setPuntosActualizados(data.puntos)
       } else {
-        setMensaje(data.error || 'Error al cargar puntos')
+        setMensaje(data.error || 'Error al redimir puntos')
       }
     } catch (err) {
       console.error(err)
@@ -134,9 +135,9 @@ export default function CargaPuntos() {
   }
 
   return (
-    <main className="carga-main">
+    <main className="redimir-main">
       <img src="/logo-fideliza.png" alt="Fideliza" className="logo-fideliza" />
-      <h2 className="titulo-carga">Carga de puntos</h2>
+      <h2 className="titulo-redimir">Redimir Puntos</h2>
 
       {!usuario && scannerActivo && scannerId && (
         <>
@@ -149,13 +150,13 @@ export default function CargaPuntos() {
           </div>
 
           {permisoCamaraDenegado && (
-            <p className="mensaje-error-permiso" style={{ color: '#ef4444', fontSize: '0.85rem', margin: '10px 0' }}>
+            <p className="mensaje-error-permiso" style={{ color: '#cb2227', fontSize: '0.85rem', margin: '10px 0' }}>
               ⚠️ Permiso de cámara requerido. Si estás usando la aplicación, otorga los permisos en la configuración de tu celular.
             </p>
           )}
 
-          <div className="carga-info">
-            <div className="botones-carga">
+          <div className="redimir-info">
+            <div className="botones-redimir">
               <button onClick={btnsalir} className="boton-salir">
                 Salir
               </button>
@@ -165,14 +166,14 @@ export default function CargaPuntos() {
       )}
 
       {usuario && (
-        <div className="carga-info">
+        <div className="redimir-info">
           <p><strong>Nombre:</strong> {usuario.usuario.nombre}</p>
           <p><strong>Comercio:</strong> {usuario.comercio.nombre}</p>
           {puntosActualizados !== null ? (
             <>
               <p className="mensaje-exito">{mensaje}</p>
-              <p><strong>Puntos actuales:</strong> {puntosActualizados}</p>
-              <div className="botones-carga">
+              <p><strong>Puntos restantes:</strong> {puntosActualizados}</p>
+              <div className="botones-redimir">
                 <button onClick={btnsalir} className="boton-salir">
                   Salir
                 </button>
@@ -180,17 +181,17 @@ export default function CargaPuntos() {
             </>
           ) : (
             <>
-              <p><strong>Puntos actuales:</strong> {usuario.puntos}</p>
+              <p><strong>Puntos disponibles:</strong> {usuario.puntos}</p>
               <input
                 type="number"
-                placeholder="Cantidad de puntos a cargar"
+                placeholder="Cantidad de puntos a redimir"
                 value={puntos}
                 onChange={e => setPuntos(e.target.value)}
                 className="input-puntos"
               />
-              <div className="botones-carga">
-                <button onClick={cargarPuntos} disabled={loading || !puntos} className="boton-cargar">
-                  {loading ? 'Cargando...' : 'Confirmar carga'}
+              <div className="botones-redimir">
+                <button onClick={procesarRedencion} disabled={loading || !puntos} className="boton-redimir">
+                  {loading ? 'Procesando...' : 'Confirmar redención'}
                 </button>
                 <button onClick={volverAEscanear} className="boton-volver">
                   Volver a escanear
@@ -204,7 +205,7 @@ export default function CargaPuntos() {
         </div>
       )}
 
-      <p className="mensaje-carga">{mensaje && puntosActualizados === null ? mensaje : ''}</p>
+      <p className="mensaje-redimir">{mensaje && puntosActualizados === null ? mensaje : ''}</p>
       <footer className="footer-fideliza">
         Fideliza · Gana puntos, redime experiencias
       </footer>
